@@ -5,10 +5,6 @@ export default class AbstractView {
     this.element = null;
   }
 
-  getTemplate() {
-    throw new Error('Abstract method not implemented');
-  }
-
   getElement() {
     if (!this.element) {
       this.element = createElement(this.getTemplate());
