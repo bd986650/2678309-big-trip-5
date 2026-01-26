@@ -1,6 +1,5 @@
 export const destinations = {
   paris: {
-    id: 'paris',
     name: 'Paris',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     pictures: [
@@ -12,7 +11,6 @@ export const destinations = {
   },
 
   amsterdam: {
-    id: 'amsterdam',
     name: 'Amsterdam',
     description: 'Cras aliquet varius magna, non porta ligula feugiat eget.',
     pictures: [

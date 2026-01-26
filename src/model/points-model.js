@@ -1,9 +1,7 @@
-export default class PointsModel {
-  #points = [];
+import { points } from '../mock/points';
 
-  constructor(points) {
-    this.#points = points;
-  }
+export default class PointsModel {
+  #points = points;
 
   getPoints() {
     return this.#points;

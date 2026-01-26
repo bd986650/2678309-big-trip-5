@@ -5,42 +5,41 @@ import EventsListView from '../view/event-list-view';
 import EventItemView from '../view/event-item-view';
 import EditEventFormView from '../view/edit-event-form-view';
 import PointsModel from '../model/points-model';
-import { points } from '../mock/points';
 import { destinations } from '../mock/destinations';
 import { offers } from '../mock/offers';
 
 export default class MainPresenter {
-  constructor() {
-    this.tripEvents = document.querySelector('.trip-events');
-    this.filterEvents = document.querySelector('.trip-controls__filters');
-    this.eventsList = new EventsListView();
-    this.pointsModel = new PointsModel(points);
-  }
+  #tripEvents = document.querySelector('.trip-events');
+  #filterEvents = document.querySelector('.trip-controls__filters');
+  #eventsList = new EventsListView();
+  #pointsModel = new PointsModel();
 
   init() {
-    render(new FilterView(), this.filterEvents);
-    render(new SortView(), this.tripEvents);
-    render(this.eventsList, this.tripEvents);
+    render(new FilterView(), this.#filterEvents);
+    render(new SortView(), this.#tripEvents);
+    render(this.#eventsList, this.#tripEvents);
 
-    this.pointsModel.getPoints().forEach((point) => {
-      render(
-        new EventItemView({
-          point,
-          destination: destinations[point.destinationId],
-          offers: offers[point.type] ?? []
-        }),
-        this.eventsList.getElement()
-      );
-    });
+    const points = this.#pointsModel.getPoints();
 
     render(
       new EditEventFormView({
-        point: null,
-        destinations,
-        offers
+        point: points[0],
+        destination: destinations[points[0].destination],
+        offers: offers[points[0].type]
       }),
-      this.eventsList.getElement(),
+      this.#eventsList.getElement(),
       RenderPosition.AFTERBEGIN
     );
+
+    points.forEach((point) => {
+      render(
+        new EventItemView({
+          point,
+          destination: destinations[point.destination],
+          offers: offers[point.type]
+        }),
+        this.#eventsList.getElement()
+      );
+    });
   }
 }

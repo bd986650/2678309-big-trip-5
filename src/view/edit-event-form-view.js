@@ -1,6 +1,10 @@
 import AbstractView from './abstract-view';
+import { formatDateForEditForm } from '../utils/date';
 
 function createEditEventFormTemplate(point, destination, offers) {
+  const dateFrom = formatDateForEditForm(point.dateFrom);
+  const dateTo = formatDateForEditForm(point.dateTo);
+
   return `<li class="trip-events__item">
               <form class="event event--edit" action="#" method="post">
                 <header class="event__header">
@@ -76,9 +80,11 @@ function createEditEventFormTemplate(point, destination, offers) {
                   </div>
 
                   <div class="event__field-group  event__field-group--time">
-                    <input class="event__input  event__input--time" type="text" name="event-start-time" value="${point.dateFrom}">
+                    <label class="visually-hidden" for="event-start-time-1">From</label>
+                    <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${dateFrom}">
                     &mdash;
-                    <input class="event__input  event__input--time" type="text" name="event-end-time" value="${point.dateTo}">
+                     <label class="visually-hidden" for="event-end-time-1">To</label>
+                    <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${dateTo}">
                   </div>
 
                   <div class="event__field-group  event__field-group--price">
