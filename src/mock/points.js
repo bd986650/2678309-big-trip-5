@@ -2,20 +2,100 @@ export const points = [
   {
     type: 'flight',
     destination: 'paris',
-    dateFrom: '2025-03-18T10:30',
-    dateTo: '2025-03-18T12:00',
-    basePrice: 10,
+    dateFrom: '2025-03-18T06:30',
+    dateTo: '2025-03-18T09:45',
+    basePrice: 120,
+    offers: ['luggage', 'meal'],
+    isFavorite: false
+  },
+
+  {
+    type: 'taxi',
+    destination: 'paris',
+    dateFrom: '2025-03-18T10:00',
+    dateTo: '2025-03-18T10:30',
+    basePrice: 25,
+    offers: ['comfort'],
+    isFavorite: true
+  },
+
+  {
+    type: 'train',
+    destination: 'amsterdam',
+    dateFrom: '2025-03-19T08:00',
+    dateTo: '2025-03-19T12:30',
+    basePrice: 90,
+    offers: ['first-class'],
+    isFavorite: false
+  },
+
+  {
+    type: 'bus',
+    destination: 'amsterdam',
+    dateFrom: '2025-03-19T14:00',
+    dateTo: '2025-03-19T18:00',
+    basePrice: 20,
+    offers: ['wifi'],
+    isFavorite: false
+  },
+
+  {
+    type: 'flight',
+    destination: 'london',
+    dateFrom: '2025-03-20T07:15',
+    dateTo: '2025-03-20T09:00',
+    basePrice: 150,
+    offers: ['meal'],
+    isFavorite: true
+  },
+
+  {
+    type: 'taxi',
+    destination: 'london',
+    dateFrom: '2025-03-20T09:15',
+    dateTo: '2025-03-20T09:40',
+    basePrice: 30,
+    offers: [],
+    isFavorite: false
+  },
+
+  {
+    type: 'train',
+    destination: 'berlin',
+    dateFrom: '2025-03-21T10:00',
+    dateTo: '2025-03-21T16:00',
+    basePrice: 110,
+    offers: ['meal'],
+    isFavorite: false
+  },
+
+  {
+    type: 'bus',
+    destination: 'berlin',
+    dateFrom: '2025-03-21T17:00',
+    dateTo: '2025-03-21T22:30',
+    basePrice: 35,
+    offers: ['wifi'],
+    isFavorite: true
+  },
+
+  {
+    type: 'flight',
+    destination: 'rome',
+    dateFrom: '2025-03-22T06:00',
+    dateTo: '2025-03-22T08:50',
+    basePrice: 180,
     offers: ['luggage'],
     isFavorite: false
   },
+
   {
     type: 'taxi',
-    destination: 'amsterdam',
-    dateFrom: '2025-03-19T14:00',
-    dateTo: '2025-03-19T15:00',
-    basePrice: 40,
-    offers: [],
+    destination: 'rome',
+    dateFrom: '2025-03-22T09:10',
+    dateTo: '2025-03-22T09:35',
+    basePrice: 28,
+    offers: ['comfort'],
     isFavorite: true
   }
 ];
-
