@@ -1,4 +1,4 @@
-import AbstractView from './abstract-view';
+import AbstractView from '../framework/view/abstract-view';
 
 function createNewEventFormTemplate() {
   return `<li class="trip-events__item">
@@ -166,7 +166,7 @@ function createNewEventFormTemplate() {
 }
 
 export default class NewEventFormView extends AbstractView {
-  getTemplate() {
+  get template() {
     return createNewEventFormTemplate();
   }
 }

@@ -1,4 +1,4 @@
-import AbstractView from './abstract-view';
+import AbstractView from '../framework/view/abstract-view';
 import { formatEventDate, formatTime, getDuration } from '../utils/date';
 
 function createEventItemTemplate(point, destination, offers) {
@@ -68,15 +68,21 @@ export default class EventItemView extends AbstractView {
   #point;
   #destination;
   #offers;
+  #handleEditClick;
 
-  constructor({ point, destination, offers }) {
+  constructor({ point, destination, offers, onEditClick }) {
     super();
     this.#point = point;
     this.#destination = destination;
     this.#offers = offers;
+    this.#handleEditClick = onEditClick;
+
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#handleEditClick);
   }
 
-  getTemplate() {
+  get template() {
     return createEventItemTemplate(this.#point, this.#destination, this.#offers);
   }
 }

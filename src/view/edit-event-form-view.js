@@ -1,4 +1,4 @@
-import AbstractView from './abstract-view';
+import AbstractView from '../framework/view/abstract-view';
 import { formatDateForEditForm } from '../utils/date';
 
 function createEditEventFormTemplate(point, destination, offers) {
@@ -131,15 +131,29 @@ export default class EditEventFormView extends AbstractView {
   #point;
   #destination;
   #offers;
+  #handleFormSubmit;
+  #handleCloseClick;
 
-  constructor({ point, destination, offers }) {
+  constructor({ point, destination, offers, onFormSubmit, onCloseClick }) {
     super();
     this.#point = point;
     this.#destination = destination;
     this.#offers = offers;
+    this.#handleFormSubmit = onFormSubmit;
+    this.#handleCloseClick = onCloseClick;
+
+    this.element
+      .querySelector('form')
+      .addEventListener('submit', () => {
+        this.#handleFormSubmit();
+      });
+
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#handleCloseClick);
   }
 
-  getTemplate() {
+  get template() {
     return createEditEventFormTemplate(this.#point, this.#destination, this.#offers);
   }
 }

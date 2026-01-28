@@ -1,4 +1,4 @@
-import {RenderPosition, render} from '../render';
+import { render } from '../render';
 import FilterView from '../view/filter-view';
 import SortView from '../view/sort-view';
 import EventsListView from '../view/event-list-view';
@@ -21,25 +21,39 @@ export default class MainPresenter {
 
     const points = this.#pointsModel.getPoints();
 
-    render(
-      new EditEventFormView({
-        point: points[0],
-        destination: destinations[points[0].destination],
-        offers: offers[points[0].type]
-      }),
-      this.#eventsList.getElement(),
-      RenderPosition.AFTERBEGIN
-    );
-
     points.forEach((point) => {
-      render(
-        new EventItemView({
-          point,
-          destination: destinations[point.destination],
-          offers: offers[point.type]
-        }),
-        this.#eventsList.getElement()
-      );
+      const eventView = new EventItemView({
+        point,
+        destination: destinations[point.destination],
+        offers: offers[point.type],
+        onEditClick: () => replaceEventViewToEditView()
+      });
+
+      const editView = new EditEventFormView({
+        point,
+        destination: destinations[point.destination],
+        offers: offers[point.type],
+        onFormSubmit: () => replaceEditViewToEventView(),
+        onCloseClick: () => replaceEditViewToEventView()
+      });
+
+      function replaceEventViewToEditView() {
+        eventView.element.replaceWith(editView.element);
+        document.addEventListener('keydown', onEscKeyDown);
+      }
+
+      function replaceEditViewToEventView() {
+        editView.element.replaceWith(eventView.element);
+        document.removeEventListener('keydown', onEscKeyDown);
+      }
+
+      function onEscKeyDown(evt) {
+        if (evt.key === 'Escape') {
+          replaceEditViewToEventView();
+        }
+      }
+
+      render(eventView, this.#eventsList.element);
     });
   }
 }
