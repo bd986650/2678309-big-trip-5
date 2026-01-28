@@ -1,4 +1,4 @@
-import { render } from '../render';
+import { render } from '../framework/render';
 import FilterView from '../view/filter-view';
 import SortView from '../view/sort-view';
 import EventsListView from '../view/event-list-view';
