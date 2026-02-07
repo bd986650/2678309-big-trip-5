@@ -1,5 +1,6 @@
 export const points = [
   {
+    id: '1',
     type: 'flight',
     destination: 'paris',
     dateFrom: '2025-03-18T06:30',
@@ -8,8 +9,8 @@ export const points = [
     offers: ['luggage', 'meal'],
     isFavorite: false
   },
-
   {
+    id: '2',
     type: 'taxi',
     destination: 'paris',
     dateFrom: '2025-03-18T10:00',
@@ -18,8 +19,8 @@ export const points = [
     offers: ['comfort'],
     isFavorite: true
   },
-
   {
+    id: '3',
     type: 'train',
     destination: 'amsterdam',
     dateFrom: '2025-03-19T08:00',
@@ -28,8 +29,8 @@ export const points = [
     offers: ['first-class'],
     isFavorite: false
   },
-
   {
+    id: '4',
     type: 'bus',
     destination: 'amsterdam',
     dateFrom: '2025-03-19T14:00',
@@ -38,8 +39,8 @@ export const points = [
     offers: ['wifi'],
     isFavorite: false
   },
-
   {
+    id: '5',
     type: 'flight',
     destination: 'london',
     dateFrom: '2025-03-20T07:15',
@@ -48,8 +49,8 @@ export const points = [
     offers: ['meal'],
     isFavorite: true
   },
-
   {
+    id: '6',
     type: 'taxi',
     destination: 'london',
     dateFrom: '2025-03-20T09:15',
@@ -58,8 +59,8 @@ export const points = [
     offers: [],
     isFavorite: false
   },
-
   {
+    id: '7',
     type: 'train',
     destination: 'berlin',
     dateFrom: '2025-03-21T10:00',
@@ -68,8 +69,8 @@ export const points = [
     offers: ['meal'],
     isFavorite: false
   },
-
   {
+    id: '8',
     type: 'bus',
     destination: 'berlin',
     dateFrom: '2025-03-21T17:00',
@@ -78,8 +79,8 @@ export const points = [
     offers: ['wifi'],
     isFavorite: true
   },
-
   {
+    id: '9',
     type: 'flight',
     destination: 'rome',
     dateFrom: '2025-03-22T06:00',
@@ -88,8 +89,8 @@ export const points = [
     offers: ['luggage'],
     isFavorite: false
   },
-
   {
+    id: '10',
     type: 'taxi',
     destination: 'rome',
     dateFrom: '2025-03-22T09:10',

@@ -2,17 +2,15 @@ import { render } from '../framework/render';
 import FilterView from '../view/filter-view';
 import SortView from '../view/sort-view';
 import EventsListView from '../view/event-list-view';
-import EventItemView from '../view/event-item-view';
-import EditEventFormView from '../view/edit-event-form-view';
 import PointsModel from '../model/points-model';
-import { destinations } from '../mock/destinations';
-import { offers } from '../mock/offers';
+import PointPresenter from './point-presenter';
 
 export default class MainPresenter {
   #tripEvents = document.querySelector('.trip-events');
   #filterEvents = document.querySelector('.trip-controls__filters');
   #eventsList = new EventsListView();
   #pointsModel = new PointsModel();
+  #pointPresenters = new Map();
 
   init() {
     render(new FilterView(), this.#filterEvents);
@@ -21,39 +19,28 @@ export default class MainPresenter {
 
     const points = this.#pointsModel.getPoints();
 
+    const handlePointChange = (updatedPoint) => {
+      const newData = this.#pointsModel.updatePoint(updatedPoint);
+      const presenter = this.#pointPresenters.get(newData.id);
+
+      if (presenter) {
+        presenter.updatePoint(newData);
+      }
+    };
+
+    const handleModeChange = () => {
+      this.#pointPresenters.forEach((presenter) => presenter.resetView());
+    };
+
     points.forEach((point) => {
-      const eventView = new EventItemView({
-        point,
-        destination: destinations[point.destination],
-        offers: offers[point.type],
-        onEditClick: () => replaceEventViewToEditView()
-      });
+      const pointPresenter = new PointPresenter(
+        this.#eventsList.element,
+        handlePointChange,
+        handleModeChange
+      );
 
-      const editView = new EditEventFormView({
-        point,
-        destination: destinations[point.destination],
-        offers: offers[point.type],
-        onFormSubmit: () => replaceEditViewToEventView(),
-        onCloseClick: () => replaceEditViewToEventView()
-      });
-
-      function replaceEventViewToEditView() {
-        eventView.element.replaceWith(editView.element);
-        document.addEventListener('keydown', onEscKeyDown);
-      }
-
-      function replaceEditViewToEventView() {
-        editView.element.replaceWith(eventView.element);
-        document.removeEventListener('keydown', onEscKeyDown);
-      }
-
-      function onEscKeyDown(evt) {
-        if (evt.key === 'Escape') {
-          replaceEditViewToEventView();
-        }
-      }
-
-      render(eventView, this.#eventsList.element);
+      pointPresenter.init(point);
+      this.#pointPresenters.set(point.id, pointPresenter);
     });
   }
 }
